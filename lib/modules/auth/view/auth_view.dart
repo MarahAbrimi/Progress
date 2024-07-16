@@ -1,9 +1,11 @@
+
+
 import '../../../resources/helpers/all_imports.dart';
 
 class AuthView extends StatelessWidget {
   AuthView({super.key});
 
-  final AuthController _authController = Get.find();
+  final AuthController authController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -11,146 +13,79 @@ class AuthView extends StatelessWidget {
     return UpgradeDialog(
       child: SafeArea(
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          appBar: const MainAppBar(),
           body: ListView(
-            padding: const EdgeInsets.fromLTRB(0, 400, 0, 0),
             shrinkWrap: true,
             reverse: true,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Stack(
-                    children: [
-                      Container(
-                        height: 535,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: theme.colorScheme.secondary,
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(40),
-                            topRight: Radius.circular(40),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              GetBuilder<AuthController>(
-                                builder: (controller) {
-                                  return Text(
-                                    controller.authType == AuthType.login
-                                        ? localizations.login
-                                        : localizations.signUp,
-                                    style: theme.textTheme.displayMedium,
-                                  );
-                                },
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    GetBuilder<AuthController>(
-                                      builder: (controller) {
-                                        if (controller.authType == AuthType.login) {
-                                          return const SizedBox.shrink();
-                                        }
-                                        return Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              localizations.email,
-                                              style: theme.textTheme.displaySmall,
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            const TextField(),
-                                          ],
-                                        );
-                                      },
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      localizations.email,
-                                      style: theme.textTheme.displaySmall,
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    const TextField(),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      localizations.password,
-                                      style: theme.textTheme.displaySmall,
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    const TextField(),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        FilledButton(
-                                          onPressed: () {
-                                            _authController.submit();
-                                          },
-                                          child: Text(
-                                            localizations.login,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 12,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(35, 0, 0, 0),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            localizations.doNotHaveAnAccount,
-                                            style: theme.textTheme.bodySmall,
-                                          ),
-                                          TextButton(
-                                            onPressed: _authController.changeAuthType,
-                                            child: Text(
-                                              localizations.signUp,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+              Padding(
+                padding: const EdgeInsets.all(7.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 14,
+                    ),
+                    Text(
+                      localizations.enterphoneNumber,
+                      textAlign: TextAlign.right,
+                      style: theme.textTheme.displayMedium!.copyWith(
+                        color: customTheme.black,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 334,
+                      child: Text(
+                        localizations.sendSms,
+                        textAlign: TextAlign.right,
+                        style: theme.textTheme.titleLarge!.copyWith(
+                          color: customTheme.black,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
-                      Transform.translate(
-                        offset: const Offset(0, -253),
-                        child: Image.asset(
-                          IconsManager.appIcon,
-                          width: width * 0.25,
-                          height: width * 0.25,
+                    ),
+                    GetBuilder<AuthController>(builder: (controller) {
+                      return MainTextField(
+                        controller: controller.phoneController,
+                        suffixIcon: CountryPicker(
+                          selectedCountryFlag: controller.selectedCountryFlag,
+                          selectedCountryCode: controller.selectedPhoneCode,
+                          onSelect: (Country country) {
+                            controller.setSelectedCountryFlag =
+                                country.flagEmoji;
+                            controller.setSelectedPhoneCode = country.phoneCode;
+                          },
                         ),
+                        hint: localizations.phoneNumber,
+                        keyboardType: TextInputType.phone,
+                        validator: ValidationsManager.validatePhone,
+                      );
+                    }),
+                    MainButton(
+                      titleWidget: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            localizations.sendOtp,
+                            textAlign: TextAlign.right,
+                            style: theme.textTheme.titleLarge!.copyWith(
+                              color: customTheme.white,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white,
+                          )
+                        ],
                       ),
-                    ],
-                  )
-                ],
+                      onPressed: () {
+                        Get.to(OtpView());
+                      },
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

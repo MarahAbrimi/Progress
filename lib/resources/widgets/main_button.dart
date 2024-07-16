@@ -27,16 +27,16 @@ class MainButton extends StatelessWidget {
     final double width = MediaQuery.of(context).size.width;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 7.0),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            // borderRadius: BorderRadius.circular(5.0),
             side: borderSide ?? BorderSide.none,
           ),
           elevation: elevation,
           surfaceTintColor: Colors.transparent,
-          backgroundColor: backgroundColor ?? theme.colorScheme.primary,
+          backgroundColor: backgroundColor ?? theme.colorScheme.secondary,
           minimumSize: Size(width * 0.75, 46.0),
           maximumSize: Size(width, 46.0),
           fixedSize: buttonWidth == null ? Size(width, 46.0) : null,

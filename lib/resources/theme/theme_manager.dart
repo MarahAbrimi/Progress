@@ -74,17 +74,17 @@ class ThemeManager {
           fontWeight: FontWeight.w400,
         ),
         displayMedium: TextStyle(
-          fontSize: 16.0,
+          fontSize: 20.0,
           color: ColorsManager.primary,
           fontWeight: FontWeight.w400,
         ),
         titleLarge: TextStyle(
-          fontSize: 14.0,
+          fontSize: 16.0,
           color: ColorsManager.primary,
           fontWeight: FontWeight.bold,
         ),
         titleMedium: TextStyle(
-          fontSize: 12.0,
+          fontSize: 14.0,
           color: ColorsManager.black,
           fontWeight: FontWeight.w500,
         ),

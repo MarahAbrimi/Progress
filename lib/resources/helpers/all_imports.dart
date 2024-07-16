@@ -66,3 +66,11 @@ export '../widgets/main_button.dart';
 export '../widgets/main_text_field.dart';
 export '../widgets/scale_text.dart';
 export '../../../resources/widgets/upgrade_dialog.dart';
+export 'package:start_up_workspace/modules/settings/widgets/code_pins.dart';
+
+export 'package:country_picker/country_picker.dart';
+export 'package:start_up_workspace/modules/auth/view/otp_view.dart';
+export 'package:start_up_workspace/modules/settings/widgets/country_picker.dart';
+export 'package:start_up_workspace/resources/managers/validations_manager.dart';
+export 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+export 'package:pinput/pinput.dart';

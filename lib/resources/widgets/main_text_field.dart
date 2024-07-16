@@ -69,17 +69,19 @@ class MainTextField extends StatelessWidget {
           color: customTheme.black,
         ),
         decoration: InputDecoration(
-          fillColor: theme.colorScheme.surface,
+          fillColor: customTheme.grey,
+//           width: 334,
+// height: 49,
+
           filled: true,
           labelText: label,
-          labelStyle: TextStyle(
-            fontSize: 14.0,
-            color: customTheme.grey,
-          ),
+          labelStyle: TextStyle(fontSize: 14.0, color: customTheme.darkGrey),
           hintText: hint,
           hintStyle: TextStyle(
-            fontSize: 14.0,
-            color: customTheme.grey,
+            fontSize: 15.0,
+            fontWeight: FontWeight.w600,
+            color: theme.colorScheme.secondary,
+            fontFamily: 'Cairo',
           ),
           prefixIcon: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -88,46 +90,40 @@ class MainTextField extends StatelessWidget {
           contentPadding: const EdgeInsets.symmetric(vertical: 7.0),
           prefixIconColor: theme.colorScheme.primary,
           prefixIconConstraints: const BoxConstraints(
-            maxHeight: 28.0,
-            maxWidth: 32.0,
+            maxHeight: 30.0,
+            maxWidth: 38.0,
           ),
-          suffixIcon: Padding(
-            padding: EdgeInsets.only(
-              right: Components().isRTL() ? 0.0 : 8.0,
-              left: Components().isRTL() ? 8.0 : 0.0,
-            ),
-            child: suffixIcon,
-          ),
+          suffixIcon: suffixIcon,
           suffixIconConstraints: const BoxConstraints(
-            maxHeight: 24.0,
-            maxWidth: 32.0,
+            maxHeight: 60.0,
+            maxWidth: 85.0,
           ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            // borderRadius: BorderRadius.circular(5.0),
             borderSide: BorderSide(
               color: customTheme.grey,
             ),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            // borderRadius: BorderRadius.circular(5.0),
             borderSide: BorderSide(
               color: customTheme.grey,
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            // borderRadius: BorderRadius.circular(5.0),
             borderSide: BorderSide(
-              color: theme.colorScheme.primary,
+              color: customTheme.grey,
             ),
           ),
           disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            // borderRadius: BorderRadius.circular(5.0),
             borderSide: BorderSide(
               color: customTheme.grey,
             ),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            // borderRadius: BorderRadius.circular(5.0),
             borderSide: BorderSide(
               color: customTheme.grey,
             ),

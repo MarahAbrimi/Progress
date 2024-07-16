@@ -4,7 +4,8 @@ class ColorsManager {
   static Color primary = const Color(0xff000000);
   //* Light Theme Colors
 
-  static const Color secondary = Color.fromARGB(144, 0, 0, 0);
+  static const Color secondary = Color(0x8E000000);
+
   static Color background = const Color(0xffFFFFFF);
   static Color white = const Color(0xffFFFFFF);
   static Color black = const Color(0xff000000);

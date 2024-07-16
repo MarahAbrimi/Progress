@@ -8,8 +8,7 @@ class ConnectionErrorView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(
-        title: localizations.connectionError,
+      appBar: const MainAppBar(
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
