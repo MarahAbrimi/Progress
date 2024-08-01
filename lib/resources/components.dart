@@ -6,7 +6,9 @@ class Components {
   static final Components _instance = Components._();
 
   factory Components() => _instance;
-
+  dynamic bodyDecode(List<int> bodyBytes) {
+    return jsonDecode(utf8.decode(bodyBytes));
+  }
   void snackBar({
     required String message,
     SnackBarStatus snackBarStatus = SnackBarStatus.warning,
@@ -125,33 +127,6 @@ class Components {
     return InternetConnectionChecker().hasConnection;
   }
 
-  // Future<CroppedFile?> cropImage({required String path, bool isLogo = false}) async {
-  //   CroppedFile? croppedFile = await ImageCropper().cropImage(
-  //     sourcePath: path,
-  //     cropStyle: isLogo ? CropStyle.circle : CropStyle.rectangle,
-  //     compressQuality: 100,
-  //     compressFormat: isLogo ? ImageCompressFormat.png : ImageCompressFormat.jpg,
-  //     aspectRatio: isLogo
-  //         ? const CropAspectRatio(ratioX: 1, ratioY: 1)
-  //         : const CropAspectRatio(ratioX: 16, ratioY: 9),
-  //     uiSettings: [
-  //       AndroidUiSettings(
-  //         toolbarTitle: localizations.chooseHowImageWillDisplayed,
-  //         toolbarColor: theme.colorScheme.primary,
-  //         toolbarWidgetColor: customTheme.white,
-  //         lockAspectRatio: true,
-  //       ),
-  //       IOSUiSettings(
-  //         title: localizations.chooseHowImageWillDisplayed,
-  //         aspectRatioLockEnabled: true,
-  //         resetAspectRatioEnabled: false,
-  //         aspectRatioPickerButtonHidden: true,
-  //         resetButtonHidden: true,
-  //       ),
-  //     ],
-  //   );
-  //   return croppedFile;
-  // }
 
   Future<TimeOfDay?> timePicker(BuildContext context, {TimeOfDay? initialTime}) async {
     final TimeOfDay? time = await showTimePicker(
@@ -238,16 +213,6 @@ class Components {
     return dateTime;
   }
 
-//  String getMobileNumberWithCountryCode({
-//   required String phone,
-//   required String countryCode,
-// }) {
-//   String phoneWithoutZero = phone;
-//   if (phoneWithoutZero[0] == '0') {
-//     phoneWithoutZero = phoneWithoutZero.replaceFirst('0', '');
-//   }
-//   return '$countryCode$phoneWithoutZero';
-// }
 }
 
 enum SnackBarStatus {

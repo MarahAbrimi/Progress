@@ -58,16 +58,20 @@
   "yourDeviceNotConnectedInternet": "Your device is not connected to the Internet.",
 
 
-  "sendOtp":"إرسال رمز التحقق ",
-  "enterphoneNumber":"إدخال رقم الهاتف للمتابعة",
-  "confirmationPhoneNumber":"تأكيد رقم الهاتف عبر رمز التحقق",
-  "confirmationMsg":"قمنا بإرسال رمز التحقق إلى رقم الهاتف",
-  "confirmationMsg1":"يرجى إدخاله في الحقل أدناه:",
-  "sendSms":"سنقوم بإرسال رسالة تأكد من رقم الهاتف عبر الواتساب أو عبر رسالة قصيرة SMS",
-  "phoneNotValid":"رقم الهاتف غير صالح",
-  "done":"المتابعة",
-  "codeAtLeastFourChars": "يجب أن يتكون الرمز من 4 أحرف على الأقل",
-  "codeRequired": "الرمز مطلوب"
-
+ "sendOtp": "Send Verification Code",
+"enterphoneNumber": "Enter Phone Number to Continue",
+"confirmationPhoneNumber": "Confirm Phone Number with Verification Code",
+"confirmationMsg": "We have sent the verification code to your phone number",
+"confirmationMsg1": "Please enter it in the field below:",
+"sendSms": "We will send a phone number verification message via WhatsApp or SMS",
+"phoneNotValid": "Phone number is not valid",
+"done": "Continue",
+"codeAtLeastFourChars": "The code must be at least 4 characters",
+"age": " age",
+"gender": "gender",
+"error": "error",
+"invalidOtp": "invalid Otp",
+"userNotRegistered": "user Not Registered",
+"codeRequired": "Code is required"
 
 }

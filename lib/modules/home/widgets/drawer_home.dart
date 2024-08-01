@@ -24,7 +24,6 @@ class DrawerHome extends StatelessWidget {
                 margin: const EdgeInsets.all(0.0),
                 accountName: GestureDetector(
                   onTap: () {
-                    // Get.toNamed(Routes.profileRoute);
                   },
                   child: Text(
                     'User Name',

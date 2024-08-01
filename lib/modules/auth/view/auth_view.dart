@@ -1,17 +1,17 @@
+import 'package:start_up_workspace/modules/auth/view/register_view.dart';
 
-
+import '../../../resources/globals.dart';
 import '../../../resources/helpers/all_imports.dart';
 
 class AuthView extends StatelessWidget {
   AuthView({super.key});
 
-  final AuthController authController = Get.find();
+  final AuthController authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.sizeOf(context).width;
-    return UpgradeDialog(
-      child: SafeArea(
+    return  SafeArea(
         child: Scaffold(
           appBar: const MainAppBar(),
           body: ListView(
@@ -46,20 +46,31 @@ class AuthView extends StatelessWidget {
                       ),
                     ),
                     GetBuilder<AuthController>(builder: (controller) {
-                      return MainTextField(
-                        controller: controller.phoneController,
-                        suffixIcon: CountryPicker(
-                          selectedCountryFlag: controller.selectedCountryFlag,
-                          selectedCountryCode: controller.selectedPhoneCode,
-                          onSelect: (Country country) {
-                            controller.setSelectedCountryFlag =
-                                country.flagEmoji;
-                            controller.setSelectedPhoneCode = country.phoneCode;
-                          },
-                        ),
-                        hint: localizations.phoneNumber,
-                        keyboardType: TextInputType.phone,
-                        validator: ValidationsManager.validatePhone,
+                      return Column(
+                        children: [
+                          MainTextField(
+                            controller: controller.phoneController,
+                            suffixIcon: CountryPicker(
+                              selectedCountryFlag:
+                                  controller.selectedCountryFlag,
+                              selectedCountryCode: controller.selectedPhoneCode,
+                              onSelect: (Country country) {
+                                controller.setSelectedCountryFlag =
+                                    country.flagEmoji;
+                                controller.setSelectedPhoneCode =
+                                    country.phoneCode;
+                              },
+                            ),
+                            hint: localizations.phoneNumber,
+                            keyboardType: TextInputType.phone,
+                            validator: ValidationsManager.validatePhone,
+                          ),
+                          MainTextField(
+                            controller: controller.passwordController,
+                            hint: localizations.password,
+                            keyboardType: TextInputType.visiblePassword,
+                          ),
+                        ],
                       );
                     }),
                     MainButton(
@@ -67,7 +78,7 @@ class AuthView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            localizations.sendOtp,
+                            localizations.login,
                             textAlign: TextAlign.right,
                             style: theme.textTheme.titleLarge!.copyWith(
                               color: customTheme.white,
@@ -80,9 +91,42 @@ class AuthView extends StatelessWidget {
                           )
                         ],
                       ),
-                      onPressed: () {
-                        Get.to(OtpView());
+                      onPressed: () async {
+                        final phone = authController.phoneController.text;
+                        final password = authController.passwordController.text;
+
+                        final UserModel? userModel =
+                            await authController.checkUserRegistered(phone);
+
+                        if (userModel != null) {
+                          final isPasswordCorrect = await authController
+                              .verifyPassword(phone, password);
+
+                          if (isPasswordCorrect) {
+                            Globals().changeUserModel(userModel);
+                            Get.to(HomeView());
+                          } else {
+                            Get.snackbar('Error', 'Incorrect password');
+                          }
+                        } else {
+                          authController.showRegisterDialog();
+                        }
                       },
+                    ),
+                    const SizedBox(height: 20),
+                    Center(
+                      child: TextButton(
+                        onPressed: () {
+                          Get.to(RegisterView());
+                        },
+                        child: Text(
+                          localizations.signUp,
+                          style: TextStyle(
+                            color: theme.colorScheme.primary,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -90,7 +134,7 @@ class AuthView extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
+  
   }
 }

@@ -11,9 +11,7 @@ late PackageInfo packageInfo;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  /// TODO: remove the comment when config Firebase
-  // await FirebaseService().init();
+  await FirebaseService().init();
   // FirebaseService().initCrashlytics();
   await Future.wait(
     [
@@ -22,8 +20,6 @@ Future<void> main() async {
       MasterFunctionsService().initPackageInfo(),
       MasterFunctionsService().initPreferredOrientations(),
 
-      /// TODO: remove the comment when config Firebase
-      // NotificationService().initNotifications(),
     ],
   );
   MasterFunctionsService().initSystemUiStyle();

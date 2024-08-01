@@ -67,6 +67,11 @@
     "phoneNotValid":"رقم الهاتف غير صالح",
     "done":"المتابعة",
     "codeAtLeastFourChars": "يجب أن يتكون الرمز من 4 أحرف على الأقل",
+    "age": " العمر",
+    "gender": "الجنس",
+    "error": "حدث خطأ",
+    "invalidOtp": "رمز التحقق خطأ",
+    "userNotRegistered": "المستخدم غير مسجل",
     "codeRequired": "الرمز مطلوب"
 }
 

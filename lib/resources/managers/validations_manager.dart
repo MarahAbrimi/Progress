@@ -13,25 +13,7 @@ class ValidationsManager {
     return null;
   }
 
-  // static String? validateEmail(String? value) {
-  //   if (value == null || value.trim().isEmpty) {
-  //     return localizations.fieldRequired;
-  //   }
-  //   final RegExp emailRegex =
-  //       RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-  //   if (!emailRegex.hasMatch(value)) {
-  //     return localizations.emailNotValid;
-  //   }
 
-  //   return null;
-  // }
-
-  // static String? validateName(String? value) {
-  //   if (value == null || value.trim().isEmpty) {
-  //     return localizations.nameRequired;
-  //   }
-  //   return null;
-  // }
 
   static String? validateOtpCode(String? value) {
     if (value == null || value.trim().isEmpty) {
@@ -43,23 +25,23 @@ class ValidationsManager {
     return null;
   }
 
-  // static String? validatePassword(String? value) {
-  //   if (value == null || value.isEmpty) {
-  //     return localizations.passwordRequired;
-  //   }
-  //   if (value.length < 6) {
-  //     return localizations.passwordAtLeastSixChars;
-  //   }
-  //   return null;
-  // }
+  static String? validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return localizations.pleaseEnterPassword;
+    }
+    if (value.length < 6) {
+      return localizations.passwordMustContainNumber;
+    }
+    return null;
+  }
 
-  // static String? validateConfirmPassword(String? value, String password) {
-  //   if (value == null || value.isEmpty) {
-  //     return localizations.pleaseEnterConfirmPassword;
-  //   }
-  //   if (value != password) {
-  //     return localizations.passwordDoesNotMatch;
-  //   }
-  //   return null;
-  // }
+  static String? validateConfirmPassword(String? value, String password) {
+    if (value == null || value.isEmpty) {
+      return localizations.pleaseEnterConfirmPassword;
+    }
+    if (value != password) {
+      return localizations.passwordDoesNotMatch;
+    }
+    return null;
+  }
 }

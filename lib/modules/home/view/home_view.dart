@@ -1,117 +1,140 @@
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:start_up_workspace/resources/globals.dart';
 import '../../../resources/helpers/all_imports.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({super.key});
 
-  final HomeController homeController = Get.put(
-    HomeController(),
-  );
-
-  final List<Map<String, dynamic>> list = [
-    {'text': 'احمد الراشد', 'icon': MdiIcons.account},
-    {'text': 'مركز تجهيز الحي الشرقي', 'icon': MdiIcons.taxi},
-    {'text': 'مدينة اربد', 'icon': MdiIcons.map},
-  ];
+  final HomeController homeController = Get.put(HomeController());
+  @override
+  void initState() {
+    homeController.fetchPostsFromApi();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return UpgradeDialog(
-      child: Scaffold(
-          appBar: const MainAppBar(),
-          // bottomNavigationBar: BottomNavBar(
-          //   onTap: (int index) {
-          //     controller.changeIndex(index);
-          //   },
-          //   selectedNavIndex: controller.selectedNavIndex,
-          // ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  height: 53,
-                  padding: const EdgeInsets.all(7.0),
-                  decoration: BoxDecoration(
-                    color: customTheme.darkGrey,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'مركز متابعة Trust',
-                        textAlign: TextAlign.right,
-                        style: theme.textTheme.titleLarge!.copyWith(
-                          color: customTheme.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 17,
-                        ),
-                      ),
-                      Icon(
-                        MdiIcons.certificate,
-                        size: 26,
-                        color: customTheme.white,
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(14.0),
-                  child: SizedBox(
-                    height: 94,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+    return Scaffold(
+      appBar: const MainAppBar(),
+      body: Obx(() {
+        return IndexedStack(
+          index: homeController.selectedTabIndex.value,
+          children: [
+            _buildHomeTab(),
+            _buildProfileTab(),
+          ],
+        );
+      }),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: homeController.selectedTabIndex.value,
+        onTap: (index) {
+          homeController.changeTabIndex(index);
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: localizations.home,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'الشخصية',
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHomeTab() {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            controller: homeController.searchController,
+            decoration: InputDecoration(
+              hintText: 'البحث...',
+              prefixIcon: const Icon(Icons.search),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+            ),
+            onChanged: (String? value) {
+              homeController.filterPosts(value);
+            },
+          ),
+        ),
+        Expanded(
+          child: Obx(() {
+            if (homeController.isLoading.value) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            if (homeController.filteredPosts.isEmpty) {
+              return const Center(child: Text('ابدا البحث عن المنشور '));
+            }
+
+            return ListView.builder(
+              itemCount: homeController.filteredPosts.length,
+              itemBuilder: (context, index) {
+                final post = homeController.filteredPosts[index];
+                return Card(
+                  margin: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 16.0),
+                  elevation: 4.0,
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.all(16.0),
+                    title: Text(
+                      post.name ?? 'No Name',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          width: 200, // Set the desired width here
-                          child: ListView.builder(
-                            itemCount: list.length,
-                            itemBuilder: (context, index) {
-                              return Row(
-                                children: [
-                                  Icon(
-                                    list[index]['icon'],
-                                    size: 24,
-                                    color: customTheme.darkGrey,
-                                  ),
-                                  const SizedBox(
-                                    width: 2,
-                                  ),
-                                  Text(
-                                    list[index]['text'],
-                                    textAlign: TextAlign.right,
-                                    style:
-                                        theme.textTheme.titleMedium!.copyWith(
-                                      color: customTheme.black,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                        Container(
-                          width: 84,
-                          height: 84,
-                          decoration: ShapeDecoration(
-                            image: const DecorationImage(
-                              image: NetworkImage(
-                                 'https://cdn-icons-png.freepik.com/512/180/180644.png?ga=GA1.1.1700875974.1692094917'),
-                              fit: BoxFit.cover,
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(356),
-                            ),
-                          ),
-                        )
+                        Text(post.email ?? 'No Email'),
+                        const SizedBox(height: 8.0),
+                        Text(post.body ?? 'No Body'),
                       ],
                     ),
                   ),
-                )
-              ],
-            ),
-          )),
+                );
+              },
+            );
+          }),
+        ),
+      ],
     );
+  }
+
+  Widget _buildProfileTab() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('الاسم: ${Globals().userModel!.fullName}',
+                  style: const TextStyle(fontSize: 18)),
+              Text('العمر: ${Globals().userModel!.age}',
+                  style: const TextStyle(fontSize: 18)),
+              Text('لجنس: ${Globals().userModel!.gender}',
+                  style: const TextStyle(fontSize: 18)),
+            ],
+          ),
+          const Spacer(),
+          ElevatedButton(
+            onPressed: () {
+              _logout();
+            },
+            child: const Text('Logout'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _logout() async {
+    await FirebaseAuth.instance.signOut();
+    Get.offAll(() => AuthView());
   }
 }

@@ -35,14 +35,10 @@ export '../../modules/connection_error/view/connection_error_view.dart';
 export '../../modules/home/controller/home_controller.dart';
 export '../../modules/home/view/home_view.dart';
 export '../../modules/home/widgets/drawer_home.dart';
-export '../../modules/settings/binding/settings_binding.dart';
-export '../../modules/settings/controller/settings_controller.dart';
-export '../../modules/settings/view/settings_view.dart';
+
 export '../../modules/splash/binding/splash_binding.dart';
 export '../../modules/splash/controller/splash_controller.dart';
-export '../../modules/navigation/controller/navigation_controller.dart';
 export '../../modules/splash/view/splash_view.dart';
-export '../../repositories/auth/auth_repository.dart';
 export '../../resources/managers/routes_manager.dart';
 export '../../resources/services/master_functions_service.dart';
 export '../../resources/services/notification_service.dart';
@@ -50,8 +46,6 @@ export '../../resources/services/shared_prefs_service.dart';
 export '../../resources/theme/custom_theme_data.dart';
 export '../../resources/theme/theme_manager.dart';
 export '../../resources/services/firebase_service.dart';
-export '../../modules/navigation/binding/navigation_binding.dart';
-export '../../modules/navigation/view/navigation_view.dart';
 export '../components.dart';
 export '../enums/auth_type.dart';
 export '../managers/assets_manager.dart';
@@ -65,7 +59,6 @@ export '../widgets/main_app_bar.dart';
 export '../widgets/main_button.dart';
 export '../widgets/main_text_field.dart';
 export '../widgets/scale_text.dart';
-export '../../../resources/widgets/upgrade_dialog.dart';
 export 'package:start_up_workspace/modules/settings/widgets/code_pins.dart';
 
 export 'package:country_picker/country_picker.dart';
@@ -74,3 +67,4 @@ export 'package:start_up_workspace/modules/settings/widgets/country_picker.dart'
 export 'package:start_up_workspace/resources/managers/validations_manager.dart';
 export 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 export 'package:pinput/pinput.dart';
+export 'package:cloud_firestore/cloud_firestore.dart';
