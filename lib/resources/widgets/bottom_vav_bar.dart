@@ -1,27 +1,27 @@
 // import 'package:rive/rive.dart';
 // import 'package:start_up_workspace/models/nav_item_model.dart';
 // import 'package:start_up_workspace/resources/helpers/all_imports.dart';
-//
+
 // import '../../models/rive_model.dart';
-//
+
 // class BottomNavBar extends StatefulWidget {
 //   final Function(int index) onTap;
 //   final int selectedNavIndex;
-//
+
 //   const BottomNavBar({
 //     super.key,
 //     required this.onTap,
 //     required this.selectedNavIndex,
 //   });
-//
+
 //   @override
 //   State<BottomNavBar> createState() => _BottomNavBarState();
 // }
-//
+
 // class _BottomNavBarState extends State<BottomNavBar> {
 //   List<SMIBool> riveIconInput = [];
 //   List<StateMachineController?> stateMachineControllers = [];
-//
+
 //   @override
 //   void dispose() {
 //     for (var controller in stateMachineControllers) {
@@ -29,7 +29,7 @@
 //     }
 //     super.dispose();
 //   }
-//
+
 //   List<NavItemModel> bottonNavItem = [
 //     NavItemModel(
 //       title: 'Chat',
@@ -72,7 +72,7 @@
 //       ),
 //     ),
 //   ];
-//
+
 //   @override
 //   Widget build(BuildContext context) {
 //     int currentIndex = widget.selectedNavIndex;
@@ -140,7 +140,7 @@
 //     );
 //   }
 // }
-//
+
 // class _AnimatedBar extends StatelessWidget {
 //   const _AnimatedBar({required this.isActive});
 //   final bool isActive;

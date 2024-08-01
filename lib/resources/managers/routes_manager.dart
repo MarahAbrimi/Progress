@@ -23,11 +23,7 @@ class RouteGenerator {
         page: () => AuthView(),
         binding: AuthBinding(),
       ),
-      GetPage(
-        name: Routes.navigationRoute,
-        page: () => const NavigationView(),
-        binding: NavigationBinding(),
-      ),
+      
       GetPage(
         name: Routes.homeRoute,
         page: () => HomeView(),
@@ -37,11 +33,7 @@ class RouteGenerator {
         page: () => ConnectionErrorView(),
         binding: ConnectionErrorBinding(),
       ),
-      GetPage(
-        name: Routes.settingsRoute,
-        page: () => SettingsView(),
-        binding: SettingsBinding(),
-      ),
+   
     ];
   }
 

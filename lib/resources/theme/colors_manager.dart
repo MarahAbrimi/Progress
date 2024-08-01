@@ -1,15 +1,14 @@
 import '../helpers/all_imports.dart';
 
 class ColorsManager {
-  static Color primary = const Color(0xff000000);
+  static Color primary = const Color(0xff003366);
   //* Light Theme Colors
 
-  static const Color secondary = Color(0x8E000000);
+  static const Color secondary = Color(0x8E003366);
 
   static Color background = const Color(0xffFFFFFF);
   static Color white = const Color(0xffFFFFFF);
   static Color black = const Color(0xff000000);
-  // static Color grey = const Color(0xff656565);
   static Color grey = const Color(0xffF0F0F0);
 
   static Color darkGrey = const Color(0xff2F2F2F);
@@ -24,17 +23,10 @@ class ColorsManager {
   static const Color receiver = Color(0xFF5d5d5d); //chick if used
 
   //* Dark Theme Colors
-  // static Color darkPrimary = const Color(0xffED9728);
-  // static const Color darkSecondary = Color.fromARGB(255, 253, 184, 95);
+ 
+
   static Color darkBackground = const Color(0xff1F1F1F);
-  // static Color darkWhite = const Color(0xff000000);
-  // static Color darkBlack = const Color(0xffFFFFFF);
-  // static Color darkDarkGrey = const Color(0xff656565);
-  // static const Color darkDivider = Color(0xff30363D);
-  // static const Color darkTextField = Color(0xFF323337);
-  // static const Color darkText = Color(0xFFE5E5E5); //chick if used
-  /// Light Theme Colors
-  /// Dark Theme Colors
+ 
 
   /// Static Colors
   static const Color success = Color(0xFF4BB543);

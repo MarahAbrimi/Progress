@@ -1,17 +1,20 @@
-
-
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../resources/helpers/all_imports.dart';
 
 class OtpView extends StatelessWidget {
   OtpView({super.key});
 
-  final AuthController _authController = Get.find();
+  final AuthController _authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.sizeOf(context).width;
-    return UpgradeDialog(
-      child: SafeArea(
+    final Map<String, dynamic> arguments = Get.arguments;
+    final String verificationId = arguments['verificationId'];
+
+    return SafeArea(
         child: Scaffold(
           appBar: const MainAppBar(),
           body: ListView(
@@ -37,7 +40,7 @@ class OtpView extends StatelessWidget {
                     SizedBox(
                       width: 460,
                       child: Text(
-                        '${localizations.confirmationMsg} ${_authController.phoneController.text}',
+                        '${localizations.confirmationMsg} ${arguments['phone']}',
                         textAlign: TextAlign.right,
                         style: theme.textTheme.titleMedium!.copyWith(
                           color: customTheme.black,
@@ -56,23 +59,6 @@ class OtpView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // GetBuilder<AuthController>(builder: (controller) {
-                    //   return MainTextField(
-                    //     controller: controller.PhoneController,
-                    //     suffixIcon: CountryPicker(
-                    //       selectedCountryFlag: controller.selectedCountryFlag,
-                    //       selectedCountryCode: controller.selectedPhoneCode,
-                    //       onSelect: (Country country) {
-                    //         controller.setSelectedCountryFlag =
-                    //             country.flagEmoji;
-                    //         controller.setSelectedPhoneCode = country.phoneCode;
-                    //       },
-                    //     ),
-                    //     hint: localizations.phoneNumber,
-                    //     keyboardType: TextInputType.phone,
-                    //     validator: ValidationsManager.validatePhone,
-                    //   );
-                    // }),
                     const SizedBox(
                       height: 10,
                     ),
@@ -82,7 +68,6 @@ class OtpView extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-
                     MainButton(
                       titleWidget: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -101,66 +86,19 @@ class OtpView extends StatelessWidget {
                           )
                         ],
                       ),
-                      onPressed: () {
-                        Get.to(const NavigationView());
+                      onPressed: () async {
+                        await _authController.verifyOtp(verificationId,
+                            _authController.codeController.text, arguments);
                       },
                     ),
-                    const SizedBox(
-                      height: 55,
-                    ),
-                    SizedBox(
-                      width: 334,
-                      child: Text.rich(
-                        TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'إعادة إرسال الرمز',
-                              style: theme.textTheme.titleMedium!.copyWith(
-                                color: customTheme.darkGrey,
-                                fontWeight: FontWeight.w700,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                            TextSpan(
-                              text: ' خلال ',
-                              style: theme.textTheme.titleMedium!.copyWith(
-                                color: customTheme.black,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            TextSpan(
-                              text: '59',
-                              style: theme.textTheme.titleMedium!.copyWith(
-                                color: customTheme.black,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            TextSpan(
-                              text: ' ',
-                              style: theme.textTheme.titleMedium!.copyWith(
-                                color: customTheme.black,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'ثانية',
-                              style: theme.textTheme.titleMedium!.copyWith(
-                                color: customTheme.black,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ],
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    )
                   ],
                 ),
               ),
             ],
           ),
         ),
-      ),
-    );
+      );
+   
+ 
   }
 }

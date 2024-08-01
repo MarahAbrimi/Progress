@@ -14,7 +14,7 @@ class CodePins extends StatelessWidget {
       textDirection: TextDirection.ltr,
       child: Pinput(
         controller: controller,
-        length: 4,
+        length: 6,
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,
         ],

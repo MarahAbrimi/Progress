@@ -19,50 +19,20 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.black,
-      toolbarHeight: 100,
+      backgroundColor: Colors.white,
       systemOverlayStyle: Components().systemUiOverlayStyle(),
       automaticallyImplyLeading: false,
       title: Center(
         child: Container(
           clipBehavior: Clip.antiAlias,
           decoration: const BoxDecoration(),
-          child: const SizedBox(
-            width: 87.77,
-            height: 60.11,
-            child: Stack(
-              children: [
-                Positioned(
-                  left: 0,
-                  top: 10,
-                  child: Text(
-                    'Trust',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                      fontFamily: 'RTL-Saudi',
-                      fontWeight: FontWeight.w700,
-                      height: 0,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  left: 25.77,
-                  top: 30.00,
-                  child: Text(
-                    'Team',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                      fontFamily: 'Simah pro Arabic',
-                      fontWeight: FontWeight.w400,
-                      height: 0,
-                    ),
-                  ),
-                ),
-              ],
+          child: Padding(
+            padding: const EdgeInsets.all(50.0),
+            child: Image.asset(
+              IconsManager.appIcon,
+              height: 90.0,
+              width: 90.0,
+              fit: BoxFit.contain,
             ),
           ),
         ),

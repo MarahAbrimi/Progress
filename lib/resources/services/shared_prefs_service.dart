@@ -13,7 +13,8 @@ class SharedPrefsService {
 
   Future<void> saveUserModel(UserModel value) async {
     final String userData = jsonEncode(value.toJson());
-    final String encryptedUserData = await EncryptionService().encrypt(userData);
+    final String encryptedUserData =
+        await EncryptionService().encrypt(userData);
     await sharedPreferences.setString(
       DotenvManager.userModelPrefsKey,
       encryptedUserData,
@@ -21,9 +22,11 @@ class SharedPrefsService {
   }
 
   Future<UserModel?> getUserModel() async {
-    final String? encryptedUserData = sharedPreferences.getString(DotenvManager.userModelPrefsKey);
+    final String? encryptedUserData =
+        sharedPreferences.getString(DotenvManager.userModelPrefsKey);
     if (encryptedUserData == null) return null;
-    final String userData = await EncryptionService().decrypt(encryptedUserData);
+    final String userData =
+        await EncryptionService().decrypt(encryptedUserData);
     return UserModel.fromJson(
       jsonDecode(userData),
     );
@@ -50,19 +53,13 @@ class SharedPrefsService {
   }
 
   ThemeMode getThemeMode() {
-    final String? mode = sharedPreferences.getString(DotenvManager.themeModePrefsKey);
+    final String? mode =
+        sharedPreferences.getString(DotenvManager.themeModePrefsKey);
     return mode == ThemeMode.dark.toString()
         ? ThemeMode.dark
         : mode == ThemeMode.light.toString()
             ? ThemeMode.light
             : ThemeMode.system;
   }
-  //
-  // Future<void> saveIsFirstTime(bool value) async {
-  //   await sharedPreferences.setBool(DotenvManager.isFirstTimePrefsKey, value);
-  // }
-  //
-  // bool getIsFirstTime() {
-  //   return sharedPreferences.getBool(DotenvManager.isFirstTimePrefsKey) ?? true;
-  // }
+
 }

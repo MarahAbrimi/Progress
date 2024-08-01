@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "100527917597",
+    "project_id": "progress-soft-ab166",
+    "storage_bucket": "progress-soft-ab166.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100527917597:android:a14437291329f6900a14f4",
+        "android_client_info": {
+          "package_name": "com.example.startUpWorkspace"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdsaP2_9CJqcaHtD3V9wdugMY-ji3vX6g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
